@@ -34,7 +34,7 @@ public class HelperAttack : MonoBehaviour
 
             // Apuntar al objetivo
             Vector2 direction = (target.position - firePoint.position).normalized;
-            projectile.GetComponent<Rigidbody2D>().velocity = direction * 10f; // Velocidad del proyectil
+            projectile.GetComponent<Rigidbody2D>().linearVelocity = direction * 10f; // Velocidad del proyectil
         }
     }
 
