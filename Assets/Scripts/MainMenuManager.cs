@@ -13,17 +13,20 @@ public class MainMenuManager : MonoBehaviour
     public AudioClip errorSound;
 
     // private const string PLAY_BUTTON_NAME = "Play";
-    private const string SCENE_TO_LOAD = "Game";
+    private const string SCENE_TO_LOAD = "IntroScene";
 
-    public GameObject optionsMenu;
+    // public GameObject optionsMenu;
     public GameObject mainMenu;
+    public GameObject CreditsMenu;
+    public GameObject Indicator;
 
     private bool isNavigate = true;
 
     public enum MenuButton
     {
         Play,
-        Settings,
+        Credits,
+        // Settings,
         Quit
     }
 
@@ -52,7 +55,7 @@ public class MainMenuManager : MonoBehaviour
         {
             ChangeSelection(-1);
         }
-        else if (Input.GetKeyDown(KeyCode.Space))
+        else if (Input.GetKeyDown(KeyCode.Space) || Input.GetButtonDown("Submit"))
         {
             InteractWithButton();
             // menuButtons[currentIndex].onClick.Invoke();
@@ -86,10 +89,10 @@ public class MainMenuManager : MonoBehaviour
                 LoadScene(SCENE_TO_LOAD);
                 break;
 
-            case MenuButton.Settings:
+            case MenuButton.Credits:
                 // Debug.Log("Interacted with: Settings");
                 // Handle Settings button interaction
-                OptionsMenu();
+                CreditsMenu1();
 
                 break;
 
@@ -133,21 +136,35 @@ public class MainMenuManager : MonoBehaviour
         SceneManager.LoadScene(sceneName);
     }
 
-    void OptionsMenu()
+     void CreditsMenu1()
+    {
+        audioSource.Stop();
+        isNavigate = false;
+
+        Indicator.SetActive(false);
+        mainMenu.SetActive(false);
+        CreditsMenu.SetActive(true);
+    }
+
+   /*  void OptionsMenu()
     {
         audioSource.Stop();
         isNavigate = false;
 
         mainMenu.SetActive(false);
         optionsMenu.SetActive(true);
-    }
+    } */
 
     public void ResumeButton()
     {
-        isNavigate = true;
-        optionsMenu.SetActive(false);
+        // isNavigate = true;
+        // optionsMenu.SetActive(false);
+        CreditsMenu.SetActive(false);
         mainMenu.SetActive(true);
         PlaySound(navigationSound);
+
+        Indicator.SetActive(true);
+        isNavigate = true;
 
     }
 
