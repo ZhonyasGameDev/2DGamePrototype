@@ -8,8 +8,10 @@ public class HelperAttack : MonoBehaviour
     public float attackCooldown = 1f; // Tiempo entre disparos
     public GameObject projectilePrefab; // Prefab del proyectil
     public Transform firePoint; // Punto desde donde se dispara el proyectil
+    public KeyCode attackKey = KeyCode.Space; // Tecla para disparar
 
     private float attackTimer = 0f;
+
     void Update()
     {
         attackTimer -= Time.deltaTime;
@@ -17,7 +19,8 @@ public class HelperAttack : MonoBehaviour
         // Buscar enemigos dentro del rango
         Collider2D[] enemiesInRange = Physics2D.OverlapCircleAll(transform.position, attackRange, LayerMask.GetMask("Enemy"));
 
-        if (enemiesInRange.Length > 0 && attackTimer <= 0f)
+        // Comprobar si hay enemigos en rango y si se presionó la tecla de ataque
+        if (enemiesInRange.Length > 0 && attackTimer <= 0f && Input.GetMouseButtonDown(0))
         {
             // Disparar al primer enemigo en el rango
             Shoot(enemiesInRange[0].transform);

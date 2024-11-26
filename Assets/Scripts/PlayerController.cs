@@ -30,6 +30,10 @@ namespace TarodevController
 
         private float _time;
 
+
+        public static event Action OnPlayerJump; // Evento estático para el salto del jugador
+
+
         private void Awake()
         {
             _rb = GetComponent<Rigidbody2D>();
@@ -146,6 +150,9 @@ namespace TarodevController
             _coyoteUsable = false;
             _frameVelocity.y = _stats.JumpPower;
             Jumped?.Invoke();
+
+            //Dispara el evento
+            OnPlayerJump?.Invoke();
         }
 
         #endregion
