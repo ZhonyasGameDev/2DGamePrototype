@@ -71,6 +71,10 @@ namespace TarodevController
 
         private void FixedUpdate()
         {
+
+            //
+            if (PlayerHealth.isDie) return;
+
             CheckCollisions();
 
             HandleJump();

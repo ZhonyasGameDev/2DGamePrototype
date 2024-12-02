@@ -8,6 +8,8 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioClip playerJumpAudio;
     [SerializeField] private AudioClip helperAttackAudio;
     [SerializeField] private AudioClip playerLoseALife;
+    [SerializeField] private AudioClip playerAddLife;
+    [SerializeField] private AudioClip playerIsDie;
 
     [Header("Script References")]
     public PlayerController playerController;
@@ -22,6 +24,20 @@ public class SoundManager : MonoBehaviour
         helperAttack.OnHelperAttack += HelperAttack_OnAttack;
         enemy.OnTakeDamage += Enemy_OnTakeDamage;
         playerHealth.OnLoseLife += PlayerHealth_OnLoseLife;
+
+        playerHealth.OnAddLife += PlayerHealth_OnAddLife;
+        playerHealth.OnIsDie += PlayerHealth_OnIsDie;
+
+    }
+
+    private void PlayerHealth_OnIsDie()
+    {
+        PlaySound(playerIsDie);
+    }
+
+    private void PlayerHealth_OnAddLife()
+    {
+        PlaySound(playerAddLife);
     }
 
     private void PlayerController_OnJump()

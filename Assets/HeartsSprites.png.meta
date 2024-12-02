@@ -1,10 +1,13 @@
 fileFormatVersion: 2
-guid: 0402f54928d747c49bb3e760249cf9c7
+guid: 554a8186121041b41b9b75477dd0dfb6
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4946711563907841724
-    second: joss_azuy_a_background_for_a_2d_game_set_in_space_a_mountain_ra_a7a5cfc8-1eba-4752-89aa-34c008244c3d_0
+      213: -2382183777314232344
+    second: HeartsSprites_0
+  - first:
+      213: -8647210538765261121
+    second: HeartsSprites_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -51,7 +54,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 35
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -100,23 +103,45 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: joss_azuy_a_background_for_a_2d_game_set_in_space_a_mountain_ra_a7a5cfc8-1eba-4752-89aa-34c008244c3d_0
+      name: FullHeart
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 1456
-        height: 816
+        x: 65
+        y: 128
+        width: 126
+        height: 105
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: cbe3b0565ff36a440800000000000000
-      internalID: 4946711563907841724
+      spriteID: 721566b789fd1544383ed6911714aa3a
+      internalID: 1111454917
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EmptyHeart
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 23
+        width: 126
+        height: 105
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cd2ce3c95a1809b4fbac01333de44dd7
+      internalID: -2058070127
       vertices: []
       indices: 
       edges: []
@@ -125,7 +150,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: eb65b49cfd182a347b9d75c0150914be
     internalID: 0
     vertices: []
     indices: 
@@ -135,7 +160,8 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      joss_azuy_a_background_for_a_2d_game_set_in_space_a_mountain_ra_a7a5cfc8-1eba-4752-89aa-34c008244c3d_0: 4946711563907841724
+      EmptyHeart: -2058070127
+      FullHeart: 1111454917
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

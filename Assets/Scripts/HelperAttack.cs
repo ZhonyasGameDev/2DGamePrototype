@@ -16,6 +16,9 @@ public class HelperAttack : MonoBehaviour
 
     void Update()
     {
+        // 
+        if (PlayerHealth.isDie) return;
+
         attackTimer -= Time.deltaTime;
 
         // Buscar enemigos dentro del rango

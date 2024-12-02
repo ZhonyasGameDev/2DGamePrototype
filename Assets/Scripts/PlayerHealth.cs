@@ -14,13 +14,16 @@ public class PlayerHealth : MonoBehaviour
     private bool isInvulnerable = false;
 
     public event Action OnLoseLife;
+    public event Action OnAddLife;
+    public event Action OnIsDie;
     //public event Action OnDie;
 
-    private bool isDie = false;
-    
+    public static bool isDie;
+
 
     [SerializeField] private GameObject gameOverUI;
     [SerializeField] private PlayerController playerController;
+    [SerializeField] private GameObject player;
 
 
 
@@ -30,6 +33,7 @@ public class PlayerHealth : MonoBehaviour
     {
         // Inicializar las vidas
         currentLives = maxLives;
+        isDie = false;
         // Debug.Log(maxLives);
 
         //lifeUIManager = FindObjectOfType<LifeUIManager>();
@@ -45,6 +49,8 @@ public class PlayerHealth : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
+        if (isDie) return;
+
         // Verificar si el jugador ha colisionado con un enemigo
         if (collision.gameObject.CompareTag("Enemy") && !isInvulnerable)
         {
@@ -52,8 +58,18 @@ public class PlayerHealth : MonoBehaviour
         }
         else if (collision.gameObject.CompareTag("Heart") && !isDie)
         {
-            Debug.Log("HEY!");
-            AddLife();
+            if (currentLives < maxLives)
+            {
+                AddLife();
+            Destroy(collision.gameObject); // Destruir siempre el corazón
+                
+            }
+            else
+            {
+            Destroy(collision.gameObject); // Destruir siempre el corazón
+                
+            }
+
         }
 
     }
@@ -61,9 +77,7 @@ public class PlayerHealth : MonoBehaviour
     void LoseLife()
     {
         currentLives--;
-
-        //
-        OnLoseLife?.Invoke();
+        OnLoseLife?.Invoke(); // Event!
 
         if (currentLives <= 0)
         {
@@ -103,6 +117,11 @@ public class PlayerHealth : MonoBehaviour
         gameOverUI.SetActive(true);
         isDie = true;
 
+        OnIsDie?.Invoke();
+
+        //playerController.enabled = false;
+        player.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionX;
+
         //gameObject.SetActive(false);
         // Opcional: Recargar la escena o mostrar una pantalla de Game Over
         // UnityEngine.SceneManagement.SceneManager.LoadScene("GameOverScene");
@@ -113,8 +132,10 @@ public class PlayerHealth : MonoBehaviour
         // Método para añadir una vida extra si es necesario
         if (currentLives < maxLives)
         {
-            Debug.Log("OK!");
+            //Debug.Log("OK!");
             currentLives++;
+
+            OnAddLife?.Invoke();
         }
     }
 
