@@ -1,16 +1,28 @@
 using System.Collections;
 using UnityEngine;
 using System;
+using UnityEngine.SceneManagement;
+using TarodevController;
+
 
 public class PlayerHealth : MonoBehaviour
 {
     public int maxLives = 3; // Número máximo de vidas
     public float invulnerabilityTime = 2f; // Tiempo de invulnerabilidad después de recibir daño
 
-    private int currentLives;
+    [SerializeField] private int currentLives;
     private bool isInvulnerable = false;
 
     public event Action OnLoseLife;
+    //public event Action OnDie;
+
+    private bool isDie = false;
+    
+
+    [SerializeField] private GameObject gameOverUI;
+    [SerializeField] private PlayerController playerController;
+
+
 
     public LifeUIManager lifeUIManager;
 
@@ -21,7 +33,14 @@ public class PlayerHealth : MonoBehaviour
         // Debug.Log(maxLives);
 
         //lifeUIManager = FindObjectOfType<LifeUIManager>();
+    }
 
+    private void Update()
+    {
+        if (isDie && Input.GetKeyDown(KeyCode.Space))
+        {
+            LoadScene("GameScene");
+        }
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -31,6 +50,12 @@ public class PlayerHealth : MonoBehaviour
         {
             LoseLife();
         }
+        else if (collision.gameObject.CompareTag("Heart") && !isDie)
+        {
+            Debug.Log("HEY!");
+            AddLife();
+        }
+
     }
 
     void LoseLife()
@@ -75,6 +100,10 @@ public class PlayerHealth : MonoBehaviour
     {
         // Lógica para el final del juego
         Debug.Log("Game Over!");
+        gameOverUI.SetActive(true);
+        isDie = true;
+
+        //gameObject.SetActive(false);
         // Opcional: Recargar la escena o mostrar una pantalla de Game Over
         // UnityEngine.SceneManagement.SceneManager.LoadScene("GameOverScene");
     }
@@ -84,6 +113,7 @@ public class PlayerHealth : MonoBehaviour
         // Método para añadir una vida extra si es necesario
         if (currentLives < maxLives)
         {
+            Debug.Log("OK!");
             currentLives++;
         }
     }
@@ -92,5 +122,11 @@ public class PlayerHealth : MonoBehaviour
     {
         get { return currentLives; }
     }
+
+    void LoadScene(string sceneName)
+    {
+        SceneManager.LoadScene(sceneName);
+    }
+
 
 }
