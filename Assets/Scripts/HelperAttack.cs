@@ -1,6 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class HelperAttack : MonoBehaviour
 {
@@ -9,8 +8,11 @@ public class HelperAttack : MonoBehaviour
     public GameObject projectilePrefab; // Prefab del proyectil
     public Transform firePoint; // Punto desde donde se dispara el proyectil
     public KeyCode attackKey = KeyCode.Space; // Tecla para disparar
-
     private float attackTimer = 0f;
+
+    // public event EventHandler OnHelperAttack; // Evento 
+    public event Action OnHelperAttack; // Evento 
+
 
     void Update()
     {
@@ -38,6 +40,10 @@ public class HelperAttack : MonoBehaviour
             // Apuntar al objetivo
             Vector2 direction = (target.position - firePoint.position).normalized;
             projectile.GetComponent<Rigidbody2D>().linearVelocity = direction * 10f; // Velocidad del proyectil
+
+            // Play sound effect
+            OnHelperAttack?.Invoke();
+           // OnHelperAttack?.Invoke(this, EventArgs.Empty);
         }
     }
 

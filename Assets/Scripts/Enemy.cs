@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
@@ -12,6 +11,8 @@ public class Enemy : MonoBehaviour
     private Vector2 pointA; // Punto A calculado dinámicamente
     private Vector2 pointB; // Punto B calculado dinámicamente
     private Vector2 currentTarget;
+
+    public event Action OnTakeDamage;
 
     void Start()
     {
@@ -51,6 +52,8 @@ public class Enemy : MonoBehaviour
     {
         // Reducir la salud del enemigo
         currentHealth -= damage;
+
+        OnTakeDamage?.Invoke(); // Se dispara el evento cuando el enemigo recibe daño
 
         // Verificar si la salud llega a cero
         if (currentHealth <= 0)

@@ -940,7 +940,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -1568,7 +1568,7 @@ GameObject:
   - component: {fileID: 872147033}
   - component: {fileID: 872147032}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: TitleText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1751,7 +1751,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 333086177170536276, guid: ca561a1a4c7a2f343930c92f3d4938e0, type: 3}
+  m_Sprite: {fileID: 4191935670997845806, guid: e4068fc8b370c064494372d47a20344a, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2453,6 +2453,7 @@ MonoBehaviour:
   attackCooldown: 0.25
   projectilePrefab: {fileID: 6712289041250508529, guid: e1ab1ef8cde39e54390cf7478a741ebe, type: 3}
   firePoint: {fileID: 1232818487}
+  attackKey: 32
 --- !u!1001 &1388485673
 PrefabInstance:
   m_ObjectHideFlags: 0

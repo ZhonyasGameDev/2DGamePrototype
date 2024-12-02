@@ -3,32 +3,57 @@ using UnityEngine;
 
 public class SoundManager : MonoBehaviour
 {
-    public AudioSource audioSource;
-    public AudioClip jumpSound; // Sonido del salto
+    [Header("Audio Settings")]
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip playerJumpAudio;
+    [SerializeField] private AudioClip helperAttackAudio;
+    [SerializeField] private AudioClip playerLoseALife;
 
+    [Header("Script References")]
     public PlayerController playerController;
+    public PlayerHealth playerHealth;
+    public HelperAttack helperAttack;
+    public Enemy enemy;
 
-    void OnEnable()
+
+    private void Start()
     {
-        // Suscribir al evento OnPlayerJump
-        PlayerController.OnPlayerJump += PlayJumpSound;
+        playerController.OnPlayerJump += PlayerController_OnJump;
+        helperAttack.OnHelperAttack += HelperAttack_OnAttack;
+        enemy.OnTakeDamage += Enemy_OnTakeDamage;
+        playerHealth.OnLoseLife += PlayerHealth_OnLoseLife;
     }
 
-    void OnDisable()
+    private void PlayerController_OnJump()
     {
-        // Desuscribir al evento OnPlayerJump
-        PlayerController.OnPlayerJump -= PlayJumpSound;
+        PlaySound(playerJumpAudio);
     }
 
-    void PlayJumpSound()
+    private void HelperAttack_OnAttack()
     {
-        if (audioSource != null && jumpSound != null)
+        PlaySound(helperAttackAudio);
+    }
+
+    private void Enemy_OnTakeDamage()
+    {
+        //PlaySound();
+    }
+
+    private void PlayerHealth_OnLoseLife()
+    {
+        PlaySound(playerLoseALife);
+    }
+
+    private void PlaySound(AudioClip audioClip)
+    {
+        if (audioSource != null && audioClip != null)
         {
-            audioSource.PlayOneShot(jumpSound); // Reproduce el sonido del salto
+            audioSource.PlayOneShot(audioClip); // Reproduce el sonido del salto
         }
         else
         {
-            Debug.LogWarning("AudioSource o JumpSound no asignado en el SoundManager.");
+            Debug.LogWarning("AudioSource o audioClip no asignado en el SoundManager.");
         }
     }
+
 }

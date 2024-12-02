@@ -30,9 +30,8 @@ namespace TarodevController
 
         private float _time;
 
-
-        public static event Action OnPlayerJump; // Evento estático para el salto del jugador
-
+        //----
+        public event Action OnPlayerJump; // Evento para el salto del jugador
 
         private void Awake()
         {

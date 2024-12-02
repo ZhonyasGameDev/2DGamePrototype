@@ -1,6 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -9,6 +9,8 @@ public class PlayerHealth : MonoBehaviour
 
     private int currentLives;
     private bool isInvulnerable = false;
+
+    public event Action OnLoseLife;
 
     public LifeUIManager lifeUIManager;
 
@@ -34,6 +36,9 @@ public class PlayerHealth : MonoBehaviour
     void LoseLife()
     {
         currentLives--;
+
+        //
+        OnLoseLife?.Invoke();
 
         if (currentLives <= 0)
         {
