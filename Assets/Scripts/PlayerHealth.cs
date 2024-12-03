@@ -64,11 +64,6 @@ public class PlayerHealth : MonoBehaviour
             Destroy(collision.gameObject); // Destruir siempre el corazón
                 
             }
-            else
-            {
-            Destroy(collision.gameObject); // Destruir siempre el corazón
-                
-            }
 
         }
 
