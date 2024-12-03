@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 5fa0f376f012dfa498b8c1db6d97ae12
+guid: af967955ced699641bba90a26ff59104
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 2185564571008977412
-    second: joss_azuy_an_illustration_of_a_background_for_a_2d_game_set_in__c1c435d7-edfc-4b7c-9c56-8fea0c39801a_0
+      213: 1849347387030142998
+    second: 1733260159909_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -96,30 +96,17 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: joss_azuy_an_illustration_of_a_background_for_a_2d_game_set_in__c1c435d7-edfc-4b7c-9c56-8fea0c39801a_0
+      name: 1733260159909_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 1456
-        height: 816
+        width: 899
+        height: 1599
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 40a4ba0d56fa45e10800000000000000
-      internalID: 2185564571008977412
+      spriteID: 6108a3676a33aa910800000000000000
+      internalID: 1849347387030142998
       vertices: []
       indices: 
       edges: []
@@ -147,8 +134,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      joss_azuy_an_illustration_of_a_background_for_a_2d_game_set_in__c1c435d7-edfc-4b7c-9c56-8fea0c39801a_0: 2185564571008977412
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
