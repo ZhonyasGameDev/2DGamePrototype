@@ -61,14 +61,9 @@ public class PlayerHealth : MonoBehaviour
             if (currentLives < maxLives)
             {
                 AddLife();
-            Destroy(collision.gameObject); // Destruir siempre el corazón
-                
+                Destroy(collision.gameObject); // Destruir siempre el corazón   
             }
-            else
-            {
-            Destroy(collision.gameObject); // Destruir siempre el corazón
-                
-            }
+
 
         }
 
