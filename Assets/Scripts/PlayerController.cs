@@ -33,12 +33,18 @@ namespace TarodevController
         //----
         public event Action OnPlayerJump; // Evento para el salto del jugador
 
+        private Animator animator;
+
+
         private void Awake()
         {
             _rb = GetComponent<Rigidbody2D>();
             _col = GetComponent<CapsuleCollider2D>();
 
             _cachedQueryStartInColliders = Physics2D.queriesStartInColliders;
+
+
+            animator = GetComponent<Animator>();
         }
 
         private void Update()
@@ -49,6 +55,7 @@ namespace TarodevController
 
         private void GatherInput()
         {
+            // 
             _frameInput = new FrameInput
             {
                 JumpDown = Input.GetButtonDown("Jump") || Input.GetKeyDown(KeyCode.C),
@@ -72,20 +79,18 @@ namespace TarodevController
         private void FixedUpdate()
         {
 
-            //
+            // FIX ERROR!
             if (PlayerHealth.isDie) return;
-
+            HandleGravity();
+            ApplyMovement();
             CheckCollisions();
-
             HandleJump();
             HandleDirection();
-            HandleGravity();
-            
-            ApplyMovement();
+
         }
 
         #region Collisions
-        
+
         private float _frameLeftGrounded = float.MinValue;
         private bool _grounded;
 
@@ -108,6 +113,10 @@ namespace TarodevController
                 _bufferedJumpUsable = true;
                 _endedJumpEarly = false;
                 GroundedChanged?.Invoke(true, Mathf.Abs(_frameVelocity.y));
+
+
+                // Desactivar la animación de salto al aterrizar
+                animator.SetBool("IsJumping", false);
             }
             // Left the Ground
             else if (_grounded && !groundHit)
@@ -143,6 +152,9 @@ namespace TarodevController
             if (_grounded || CanUseCoyote) ExecuteJump();
 
             _jumpToConsume = false;
+
+            // Activar la animación de salto
+            animator.SetBool("IsJumping", true);
         }
 
         private void ExecuteJump()
@@ -156,6 +168,7 @@ namespace TarodevController
 
             //Dispara el evento
             OnPlayerJump?.Invoke();
+
         }
 
         #endregion
@@ -164,14 +177,31 @@ namespace TarodevController
 
         private void HandleDirection()
         {
+
+            // Invertir la dirección del sprite si hay movimiento horizontal
+            if (_frameInput.Move.x != 0)
+            {
+                Vector3 newScale = transform.localScale;
+                newScale.x = Mathf.Sign(_frameInput.Move.x) * Mathf.Abs(newScale.x); // Ajusta el signo según la dirección
+                transform.localScale = newScale;
+            }
+            //
+
             if (_frameInput.Move.x == 0)
             {
                 var deceleration = _grounded ? _stats.GroundDeceleration : _stats.AirDeceleration;
                 _frameVelocity.x = Mathf.MoveTowards(_frameVelocity.x, 0, deceleration * Time.fixedDeltaTime);
+
+                // Detener la animación de caminata
+                animator.SetBool("IsWalking", false);
+
             }
             else
             {
                 _frameVelocity.x = Mathf.MoveTowards(_frameVelocity.x, _frameInput.Move.x * _stats.MaxSpeed, _stats.Acceleration * Time.fixedDeltaTime);
+
+                // Activar la animación de caminata
+                animator.SetBool("IsWalking", true);
             }
         }
 

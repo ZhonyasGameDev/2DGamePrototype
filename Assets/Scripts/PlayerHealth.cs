@@ -29,6 +29,13 @@ public class PlayerHealth : MonoBehaviour
 
     public LifeUIManager lifeUIManager;
 
+    private Animator animator;
+
+    private void Awake()
+    {
+        animator = GetComponent<Animator>();
+    }
+
     void Start()
     {
         // Inicializar las vidas
@@ -74,6 +81,10 @@ public class PlayerHealth : MonoBehaviour
         currentLives--;
         OnLoseLife?.Invoke(); // Event!
 
+        animator.SetTrigger("TakeDamage");
+        animator.SetBool("IsJumping", false);
+
+
         if (currentLives <= 0)
         {
             // lifeUIManager.UpdateLifeUI(); // Nos asegura que se actualice la ultima vida
@@ -115,7 +126,8 @@ public class PlayerHealth : MonoBehaviour
         OnIsDie?.Invoke();
 
         //playerController.enabled = false;
-        player.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionX;
+        //player.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionX;
+        
 
         //gameObject.SetActive(false);
         // Opcional: Recargar la escena o mostrar una pantalla de Game Over
