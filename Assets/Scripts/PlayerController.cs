@@ -49,6 +49,8 @@ namespace TarodevController
 
         private void Update()
         {
+            if(PlayerHealth.isDie) return;
+
             _time += Time.deltaTime;
             GatherInput();
         }

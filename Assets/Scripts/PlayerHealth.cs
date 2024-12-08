@@ -123,10 +123,15 @@ public class PlayerHealth : MonoBehaviour
         gameOverUI.SetActive(true);
         isDie = true;
 
+        // Dispara la animacion de muerte
+        animator.SetBool("IsDie", true);
+
+
         OnIsDie?.Invoke();
 
         //playerController.enabled = false;
-        //player.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionX;
+        //player.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
+        player.GetComponent<Rigidbody2D>().linearVelocity = Vector3.zero;
         
 
         //gameObject.SetActive(false);
