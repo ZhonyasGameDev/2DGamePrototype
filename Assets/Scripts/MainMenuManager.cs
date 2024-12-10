@@ -138,7 +138,7 @@ public class MainMenuManager : MonoBehaviour
 
      void CreditsMenu1()
     {
-        audioSource.Stop();
+        //audioSource.Stop();
         isNavigate = false;
 
         Indicator.SetActive(false);

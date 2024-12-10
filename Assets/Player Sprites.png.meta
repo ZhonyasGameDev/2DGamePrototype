@@ -127,7 +127,7 @@ TextureImporter:
         x: 136
         y: 3510
         width: 354
-        height: 550
+        height: 700
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -149,7 +149,7 @@ TextureImporter:
         x: 622
         y: 3506
         width: 541
-        height: 550
+        height: 700
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -171,7 +171,7 @@ TextureImporter:
         x: 1221
         y: 3508
         width: 545
-        height: 550
+        height: 700
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -191,9 +191,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 137
-        y: 2734
+        y: 2738
         width: 380
-        height: 549
+        height: 700
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -212,10 +212,10 @@ TextureImporter:
       name: Player Sprites_5
       rect:
         serializedVersion: 2
-        x: 689
+        x: 547
         y: 2733
-        width: 386
-        height: 550
+        width: 661
+        height: 700
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -237,7 +237,7 @@ TextureImporter:
         x: 1276
         y: 2740
         width: 402
-        height: 550
+        height: 700
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -259,7 +259,7 @@ TextureImporter:
         x: 1762
         y: 2738
         width: 448
-        height: 550
+        height: 700
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
