@@ -719,7 +719,6 @@ GameObject:
   - component: {fileID: 409478722}
   - component: {fileID: 409478721}
   - component: {fileID: 409478723}
-  - component: {fileID: 409478724}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -778,18 +777,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pauseButton: {fileID: 1154499470}
   pauseMenu: {fileID: 1901531096}
---- !u!114 &409478724
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 409478720}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 044ad6c47da1511489db141798f59506, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -2249,7 +2236,7 @@ SpriteRenderer:
   m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 3.4699998, y: 6.68}
+  m_Size: {x: 4.08, y: 5.6}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -3485,6 +3472,7 @@ EdgeCollider2D:
   m_Points:
   - {x: -0.50000006, y: 0.40940174}
   - {x: -0.37418842, y: 0.475607}
+  - {x: -0.32970798, y: 0.40281022}
   - {x: -0.2379888, y: 0.25270236}
   - {x: -0.028642822, y: 0.45443845}
   - {x: 0.2285219, y: 0.23520209}
