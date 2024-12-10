@@ -117,6 +117,19 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -127,7 +140,7 @@ TextureImporter:
         x: 136
         y: 3510
         width: 354
-        height: 550
+        height: 700
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -149,7 +162,7 @@ TextureImporter:
         x: 622
         y: 3506
         width: 541
-        height: 550
+        height: 700
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -171,7 +184,7 @@ TextureImporter:
         x: 1221
         y: 3508
         width: 545
-        height: 550
+        height: 700
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -193,7 +206,7 @@ TextureImporter:
         x: 137
         y: 2734
         width: 380
-        height: 549
+        height: 700
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -214,8 +227,8 @@ TextureImporter:
         serializedVersion: 2
         x: 689
         y: 2733
-        width: 386
-        height: 550
+        width: 392
+        height: 700
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -237,7 +250,7 @@ TextureImporter:
         x: 1276
         y: 2740
         width: 402
-        height: 550
+        height: 700
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -259,7 +272,7 @@ TextureImporter:
         x: 1762
         y: 2738
         width: 448
-        height: 550
+        height: 700
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
