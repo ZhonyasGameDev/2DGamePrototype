@@ -117,6 +117,19 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -214,10 +227,10 @@ TextureImporter:
         serializedVersion: 2
         x: 547
         y: 2733
-        width: 661
-        height: 700
+        width: 0
+        height: 0
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -230,55 +243,11 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
-    - serializedVersion: 2
-      name: Player Sprites_6
-      rect:
-        serializedVersion: 2
-        x: 1276
-        y: 2740
-        width: 402
-        height: 700
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: ca280aced5423fdb0800000000000000
-      internalID: -4759420395379981652
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Player Sprites_7
-      rect:
-        serializedVersion: 2
-        x: 1762
-        y: 2738
-        width: 448
-        height: 700
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 5f6d6d623a2cd1b60800000000000000
-      internalID: 7718539342369969909
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 891c57eef27e50a488bedb0a5f152791
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -293,8 +262,6 @@ TextureImporter:
       Player Sprites_3: 3906316530790733968
       Player Sprites_4: 9110367939881713649
       Player Sprites_5: -7128764408626469
-      Player Sprites_6: -4759420395379981652
-      Player Sprites_7: 7718539342369969909
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
