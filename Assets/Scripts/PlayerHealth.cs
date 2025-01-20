@@ -63,6 +63,11 @@ public class PlayerHealth : MonoBehaviour
         {
             LoseLife();
         }
+        else if (collision.gameObject.CompareTag("Projectile") && !isInvulnerable)
+        {
+            LoseLife();
+            Destroy(collision.gameObject); // Destruir el proyectil
+        }
         else if (collision.gameObject.CompareTag("Heart") && !isDie)
         {
             if (currentLives < maxLives)
@@ -70,20 +75,28 @@ public class PlayerHealth : MonoBehaviour
                 AddLife();
                 Destroy(collision.gameObject); // Destruir siempre el corazón   
             }
-
-
         }
-
     }
 
-    void LoseLife()
+    void OnTriggerStay2D(Collider2D collision)
+    {
+        if (isDie) return;
+
+        // Verificar si el jugador sigue en contacto con un enemigo
+        if (collision.gameObject.CompareTag("Enemy") && !isInvulnerable)
+        {
+            LoseLife();
+            //damageTimer = damageInterval; // Reinicia el temporizador de daño
+        }
+    }
+
+    public void LoseLife()
     {
         currentLives--;
         OnLoseLife?.Invoke(); // Event!
 
         animator.SetTrigger("TakeDamage");
         animator.SetBool("IsJumping", false);
-
 
         if (currentLives <= 0)
         {
@@ -97,8 +110,10 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
+
     IEnumerator InvulnerabilityCoroutine()
     {
+        /*
         isInvulnerable = true;
 
         // Opcional: Cambiar la apariencia del jugador durante la invulnerabilidad (por ejemplo, parpadeo)
@@ -114,7 +129,17 @@ public class PlayerHealth : MonoBehaviour
         }
 
         isInvulnerable = false;
+        */
+
+        // Mantener el comportamiento de invulnerabilidad del jugador sin alternar su visibilidad
+        isInvulnerable = true;
+
+        // Espera durante el tiempo de invulnerabilidad sin alternar visibilidad
+        yield return new WaitForSeconds(invulnerabilityTime);
+
+        isInvulnerable = false;
     }
+
 
     void GameOver()
     {
@@ -132,7 +157,7 @@ public class PlayerHealth : MonoBehaviour
         //playerController.enabled = false;
         //player.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
         player.GetComponent<Rigidbody2D>().linearVelocity = Vector3.zero;
-        
+
 
         //gameObject.SetActive(false);
         // Opcional: Recargar la escena o mostrar una pantalla de Game Over

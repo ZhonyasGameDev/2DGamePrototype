@@ -1,48 +1,25 @@
-using TarodevController;
 using UnityEngine;
 
 public class BossProjectile : MonoBehaviour
 {
-    [Header("Configuración del proyectil")]
-    public float speed = 5f; // Velocidad del proyectil
-    public int damage = 10; // Daño que inflige el proyectil
-    public float lifetime = 5f; // Tiempo antes de que el proyectil desaparezca
+    public float lifeTime = 5f; // Tiempo de vida del proyectil
 
-    private Vector2 direction;
-
-    void Start()
+    private void Start()
     {
-        // Destruir el proyectil automáticamente después del tiempo de vida
-        Destroy(gameObject, lifetime);
+        Destroy(gameObject, lifeTime); // Destruir el proyectil despuÃ©s de un tiempo
     }
 
-    void Update()
-    {
-        // Mover el proyectil
-        transform.Translate(direction * speed * Time.deltaTime);
-    }
-
-    public void SetDirection(Vector2 newDirection)
-    {
-        direction = newDirection.normalized; // Asegurarse de que la dirección esté normalizada
-    }
-
+    /*
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        // Si el proyectil impacta al jugador
-        if (collision.CompareTag("Player"))
-        {
-            // Inflige daño al jugador (asegúrate de que el jugador tenga un método TakeDamage)
-            //collision.GetComponent<PlayerController>()?.TakeDamage(damage);
+        PlayerHealth playerHealth = collision.GetComponent<PlayerHealth>();
 
-            // Destruir el proyectil al impactar
-            Destroy(gameObject);
-        }
-
-        // Opcional: Destruir el proyectil si impacta contra otro objeto
-        if (collision.CompareTag("Ground"))
+        if (collision.CompareTag("Player") && !PlayerHealth.isDie)
         {
-            Destroy(gameObject);
+            // LÃ³gica para daÃ±ar al jugador
+            playerHealth.LoseLife();
+            Destroy(gameObject); // Destruir el proyectil al colisionar con el jugador
         }
     }
+    */
 }

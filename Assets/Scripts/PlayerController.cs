@@ -34,6 +34,7 @@ namespace TarodevController
         public event Action OnPlayerJump; // Evento para el salto del jugador
 
         private Animator animator;
+        public Animator helperAnimator;
 
 
         private void Awake()
@@ -197,6 +198,7 @@ namespace TarodevController
                 // Detener la animación de caminata
                 animator.SetBool("IsWalking", false);
 
+                helperAnimator.SetBool("IsMoving", false);
             }
             else
             {
@@ -204,6 +206,9 @@ namespace TarodevController
 
                 // Activar la animación de caminata
                 animator.SetBool("IsWalking", true);
+
+                // Activar la animacion de movimiento del Helper
+                helperAnimator.SetBool("IsMoving", true);
             }
         }
 

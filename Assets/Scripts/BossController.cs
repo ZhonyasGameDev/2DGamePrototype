@@ -1,110 +1,125 @@
-using System.Collections;
-using TarodevController;
 using UnityEngine;
 
-public class BossController : MonoBehaviour
+public class BossMovement : MonoBehaviour
 {
-    [Header("Stats del jefe")]
-    public int maxHealth = 20; // Vida máxima
-    private int currentHealth; // Vida actual
-    public int damage = 1; // Daño que inflige el jefe
-    public float moveSpeed = 2f; // Velocidad de movimiento
-    public float detectionRange = 10f; // Rango de detección del jugador
+    [Header("Puntos de Movimiento")]
+    public Transform[] movePoints; // Array de puntos predefinidos
+    public float moveSpeed = 5f; // Velocidad de movimiento
 
-    [Header("Ataques")]
-    public GameObject projectile; // Prefab del proyectil
-    public Transform firePoint; // Punto desde donde dispara
-    public float attackCooldown = 2f; // Tiempo entre ataques
+    [Header("Tiempo de Espera entre Movimientos")]
+    public float minWaitTime = 1f; // Tiempo mÃ­nimo de espera
+    public float maxWaitTime = 3f; // Tiempo mÃ¡ximo de espera
 
-    private Transform player; // Referencia al jugador
-    private bool isAttacking = false; // Estado de ataque
-    private bool isDead = false; // Estado de muerte
+    private Rigidbody2D rb; // Referencia al Rigidbody2D del boss
+    private Transform targetPoint; // Punto objetivo actual
+
+    private enum BossState { Idle, Moving, Waiting }
+    private BossState currentState = BossState.Idle;
+
+    private float waitTimer = 0f; // Temporizador para la espera
 
     void Start()
     {
-        currentHealth = maxHealth;
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+        rb = GetComponent<Rigidbody2D>();
+
+        if (movePoints.Length < 3)
+        {
+            Debug.LogError("Debes asignar al menos 3 puntos de movimiento en el inspector.");
+            return;
+        }
+
+        // Inicializa el estado y selecciona un punto inicial
+        SelectNewTarget();
     }
 
     void Update()
     {
-        if (isDead) return;
-
-        if (player != null && Vector2.Distance(transform.position, player.position) <= detectionRange)
+        // Si el jugador muere, no se mueve
+        if (PlayerHealth.isDie)
         {
-            FollowPlayer();
-            if (!isAttacking)
+            rb.linearVelocity = Vector2.zero;
+            return;
+        }
+
+        switch (currentState)
+        {
+            case BossState.Idle:
+                SelectNewTarget();
+                break;
+
+            case BossState.Moving:
+                MoveToTarget();
+                break;
+
+            case BossState.Waiting:
+                WaitBeforeNextMove();
+                break;
+        }
+    }
+
+    private void SelectNewTarget()
+    {
+        Debug.Log("Seleccionando nuevo punto objetivo...");
+
+        // Selecciona un punto aleatorio distinto al actual
+        Transform newTarget;
+        do
+        {
+            newTarget = movePoints[Random.Range(0, movePoints.Length)];
+        } while (newTarget == targetPoint);
+
+        targetPoint = newTarget;
+        currentState = BossState.Moving;
+    }
+
+    private void MoveToTarget()
+    {
+        Debug.Log("Moviendo hacia el punto objetivo...");
+
+        // Calcula la direcciÃ³n hacia el punto objetivo
+        Vector2 direction = (targetPoint.position - transform.position).normalized;
+
+        // Mueve el boss utilizando Rigidbody2D
+        rb.linearVelocity = new Vector2(direction.x * moveSpeed, rb.linearVelocity.y);
+
+        // Si alcanza el punto objetivo, cambia al estado de espera
+        if (Mathf.Abs(transform.position.x - targetPoint.position.x) < 0.1f)
+        {
+            Debug.Log("Llego al punto objetivo!");
+            rb.linearVelocity = Vector2.zero; // Detener el movimiento
+            currentState = BossState.Waiting;
+            waitTimer = Random.Range(minWaitTime, maxWaitTime); // Define un tiempo aleatorio de espera
+        }
+    }
+
+    private void WaitBeforeNextMove()
+    {
+
+        rb.linearVelocity = Vector2.zero; // Detener el movimiento
+        Debug.Log("Esperando antes de seleccionar un nuevo punto...");
+
+        // Reduce el temporizador de espera
+        waitTimer -= Time.deltaTime;
+
+        // Si el temporizador llega a cero, cambia al estado Idle para seleccionar un nuevo punto
+        if (waitTimer <= 0f)
+        {
+            currentState = BossState.Idle;
+        }
+    }
+
+    private void OnDrawGizmos()
+    {
+        // Dibuja los puntos de movimiento en la escena para referencia
+        Gizmos.color = Color.green;
+
+        if (movePoints != null)
+        {
+            foreach (var point in movePoints)
             {
-                StartCoroutine(Attack());
+                if (point != null)
+                    Gizmos.DrawSphere(point.position, 0.2f);
             }
         }
     }
-
-    void FollowPlayer()
-    {
-        Vector2 direction = (player.position - transform.position).normalized;
-        transform.position = Vector2.MoveTowards(transform.position, player.position, moveSpeed * Time.deltaTime);
-    }
-
-
-    IEnumerator Attack()
-    {
-        isAttacking = true;
-
-        if (projectile != null && firePoint != null)
-        {
-            GameObject newProjectile = Instantiate(projectile, firePoint.position, firePoint.rotation);
-            BossProjectile projectileScript = newProjectile.GetComponent<BossProjectile>();
-
-            if (projectileScript != null)
-            {
-                Vector2 direction = (player.position - firePoint.position).normalized; // Dirección hacia el jugador
-                projectileScript.SetDirection(direction);
-            }
-        }
-
-        yield return new WaitForSeconds(attackCooldown);
-        isAttacking = false;
-    }
-
-    /*IEnumerator Attack()
-    {
-        isAttacking = true;
-
-        // Animación o efectos de ataque
-        if (projectile != null && firePoint != null)
-        {
-            Instantiate(projectile, firePoint.position, firePoint.rotation);
-        }
-
-        yield return new WaitForSeconds(attackCooldown);
-        isAttacking = false;
-    }*/
-
-    public void TakeDamage(int damageAmount)
-    {
-        currentHealth -= damageAmount;
-
-        if (currentHealth <= 0)
-        {
-            Die();
-        }
-    }
-
-    void Die()
-    {
-        isDead = true;
-        // Animación o efectos de muerte
-        Debug.Log("¡El jefe ha sido derrotado!");
-        Destroy(gameObject, 1f); // Destruir el objeto tras 1 segundo
-    }
-
-    /*private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            // Inflige daño al jugador (asumiendo que el jugador tiene un script con un método TakeDamage)
-            collision.gameObject.GetComponent<PlayerController>()?.TakeDamage(damage);
-        }
-    }*/
 }
